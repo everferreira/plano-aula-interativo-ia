@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gerador de Plano de Aula · Ecossistema IA</title>
+  <meta name="description" content="Crie planos de aula interativos e personalizados com o Ecossistema IA — BNCC Computação, metodologia ativa, trilha do aluno e uso responsável da IA.">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <header class="hero">
+    <div class="hero-inner">
+      <span class="hero-emoji">🤖</span>
+      <h1>Plano de Aula Interativo <br>com Ecossistema IA</h1>
+      <p>Gere planos de aula personalizados de <strong>Introdução à Programação com IA</strong>: objetivos, BNCC Computação, metodologia ativa, adaptações inclusivas, rubrica e trilha interativa para os alunos.</p>
+
+      <div class="hero-badges">
+        <span class="badge">🧠 BNCC Computação real</span>
+        <span class="badge">💬 Prompts prontos</span>
+        <span class="badge">♿ Inclusão (TEA/TDAH)</span>
+        <span class="badge">🎮 Quiz adaptativo</span>
+      </div>
+    </div>
+  </header>
+
+  <nav class="tabs" id="tabs" aria-label="Seções">
+    <button class="tab active" data-tab="gerador">📝 Gerador de Planos</button>
+    <button class="tab" data-tab="trilha">🎮 Trilha do Aluno</button>
+    <button class="tab" data-tab="ecossistema">🤖 Ecossistema IA</button>
+  </nav>
+
+  <main class="container">
+
+    <!-- ================= GERADOR ================= -->
+    <section class="tab-panel active" id="panel-gerador">
+
+      <div class="card form-card">
+        <h2>✍️ Personalize sua aula</h2>
+        <p class="muted">Preencha o perfil da turma e gere um plano completo na hora. Tudo roda no seu navegador, sem enviar dados para servidores.</p>
+
+        <div class="form-grid">
+          <label class="field full">
+            <span>Tema da aula</span>
+            <input type="text" id="in-tema" value="Introdução à Programação com IA" maxlength="90">
+          </label>
+
+          <label class="field">
+            <span>Etapa de ensino</span>
+            <select id="in-etapa">
+              <option value="fund1">Fundamental — Anos Iniciais (1º–5º)</option>
+              <option value="fund2">Fundamental — Anos Finais (6º–9º)</option>
+              <option value="medio">Ensino Médio (1ª–3ª série)</option>
+              <option value="oficina">Oficina livre / contraturno</option>
+            </select>
+          </label>
+
+          <label class="field">
+            <span>Duração</span>
+            <select id="in-duracao">
+              <option value="45">45 minutos</option>
+              <option value="50" selected>50 minutos</option>
+              <option value="60">60 minutos</option>
+              <option value="90">90 minutos (2 aulas)</option>
+              <option value="120">120 minutos (oficina)</option>
+            </select>
+          </label>
+
+          <label class="field">
+            <span>Perfil da turma</span>
+            <select id="in-nivel">
+              <option value="iniciante">Iniciante</option>
+              <option value="intermediario" selected>Intermediário</option>
+              <option value="avancado">Avançado</option>
+            </select>
+          </label>
+
+          <label class="field">
+            <span>Necessidades de inclusão</span>
+            <select id="in-inclusao">
+              <option value="nenhuma" selected>Sem necessidades específicas</option>
+              <option value="tea">TEA</option>
+              <option value="tdah">TDAH</option>
+              <option value="ambos">TEA + TDAH</option>
+            </select>
+          </label>
+
+          <label class="field full">
+            <span>Foco da aula</span>
+            <select id="in-foco" class="select-foco">
+              <option value="logica">🧩 Lógica e pensamento computacional</option>
+              <option value="sequencias">🔁 Sequências e repetições (laços)</option>
+              <option value="condicionais">🔀 Condicionais (SE / ENTÃO / SENÃO)</option>
+              <option value="decomposicao">🧱 Decomposição de problemas</option>
+              <option value="debug">🐞 Depuração de erros (debugging)</option>
+              <option value="ia">🤖 IA generativa como apoio à programação</option>
+            </select>
+          </label>
+        </div>
+
+        <button class="btn-primary" id="btn-gerar">✨ Gerar Plano de Aula</button>
+      </div>
+
+      <div id="out-plano" hidden></div>
+
+    </section>
+
+    <!-- ================= TRILHA DO ALUNO ================= -->
+    <section class="tab-panel" id="panel-trilha">
+      <div class="card">
+        <h2>🎮 Trilha Interativa do Aluno</h2>
+        <p class="muted">Quiz adaptativo de lógica e programação: acerte para subir de nível, erre e receba uma dica. No final, descubra seu perfil de programador(a)!</p>
+      </div>
+
+      <div class="card quiz-card" id="quiz-card">
+        <div id="quiz-intro">
+          <div class="quiz-hero">🚀</div>
+          <h3>Pronto(a) para o desafio?</h3>
+          <p>8 perguntas de lógica, sequências, condicionais, bugs e IA. A dificuldade se adapta a você.</p>
+          <button class="btn-primary" id="btn-quiz-iniciar">Começar trilha</button>
+        </div>
+
+        <div id="quiz-jogo" hidden>
+          <div class="quiz-topbar">
+            <span class="quiz-progresso" id="quiz-progresso">Pergunta 1/8</span>
+            <span class="quiz-nivel" id="quiz-nivel">Nível ⭐⭐</span>
+            <span class="quiz-pontos" id="quiz-pontos">✅ 0 · ❌ 0</span>
+          </div>
+          <div class="quiz-pergunta" id="quiz-pergunta"></div>
+          <div class="quiz-opcoes" id="quiz-opcoes"></div>
+          <div class="quiz-feedback" id="quiz-feedback" hidden>
+            <div class="feedback-texto" id="quiz-feedback-texto"></div>
+            <button class="btn-secundario" id="btn-quiz-proxima">Próxima pergunta →</button>
+          </div>
+        </div>
+
+        <div id="quiz-fim" hidden>
+          <div class="quiz-hero" id="quiz-fim-icone">🏛️</div>
+          <h3 id="quiz-fim-titulo">Arquiteto(a) de Código</h3>
+          <p id="quiz-fim-desc"></p>
+          <p class="quiz-fim-stats" id="quiz-fim-stats"></p>
+          <button class="btn-secundario" id="btn-quiz-reiniciar">🔄 Jogar de novo</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= ECOSSISTEMA ================= -->
+    <section class="tab-panel" id="panel-ecossistema">
+      <div class="card">
+        <h2>🤖 Ecossistema IA</h2>
+        <p class="muted">As ferramentas que acompanham cada momento da aula — e prompts prontos para usar como copiloto, sempre com supervisão humana.</p>
+      </div>
+      <div class="ferramentas-grid" id="ferramentas"></div>
+    </section>
+
+  </main>
+
+  <footer class="rodape">
+    <p>Desafio de Projeto · <strong>Formação AI for Teachers</strong> · DIO &amp; Santander</p>
+    <p>⌨️ com 💜 por <strong>Ever Ferreira</strong> · <a href="https://github.com/everferreira" target="_blank" rel="noopener">GitHub</a> · <a href="https://linkedin.com/in/evermaria" target="_blank" rel="noopener">LinkedIn</a></p>
+  </footer>
+
+  <script src="data.js" defer></script>
+  <script src="engine.js" defer></script>
+  <script src="app.js" defer></script>
+</body>
+</html>
