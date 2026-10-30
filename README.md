@@ -172,7 +172,7 @@ entrada do professor → validação → seleção BNCC + objetivos + atividades
 
 <div align="center">
 
-![Avatar](https://avatars.githubusercontent.com/u/everferreira?size=200)
+![Avatar](https://github.com/everferreira.png?size=200)
 
 **Ever Maria Tobias Ferreira**
 
